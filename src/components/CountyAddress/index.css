@@ -1,0 +1,8 @@
+.countryContainer{
+    display:flex;
+    flex-direction: column;
+}
+.selectContainer{
+    width:40vw;
+    height:35px;
+}
