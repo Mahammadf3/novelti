@@ -28,7 +28,8 @@ const Home=()=>{
     const[country2,setCountry]=useState("")
     const[state,setState]=useState("")
     const[city,setCity]=useState("")
-    const[phoneNumber2,setPhoneNumber2]=useState("")
+    const [phoneNumber2, setPhoneNumber2] = useState(""); 
+    const[phoneValidation,setPhoneValid]=useState(false)
     const[zipData,setZip]=useState("")
     const[cityBool,setCity2]=useState(false)
     const[stateBool,setState2]=useState(false)
@@ -90,8 +91,11 @@ const Home=()=>{
         setCity2(city.length<3);
         setState2(state.length<2);
         setCountry3(country2.length<3);
+        setPhoneValid(  phoneNumber2 && (phoneNumber2.length < 6 || phoneNumber2.length > 15));
+
+
         if(country2.length >= 3 && address.length >=3 && emailData.includes("@")  && firstName.length >= 5 &&
-            lastName.length >= 5  &&  city.length >=3 && state.length >=2 ){
+            lastName.length >= 5  &&  city.length >=3 && state.length >=2 && phoneNumber2.length>=6 && phoneNumber2.length<=15 ){
             try{
       await addDoc(collectionData,{
         Email:emailData,
@@ -192,6 +196,7 @@ const Home=()=>{
            
 
                 <PhoneNumber activePhoneNumber={activePhoneNumber}/>
+                {phoneValidation && <p className="firstNameContainer">* Enter Valid Mobile Number (between 6 and 15 characters)</p>}
 
 
                 <ZipCodeInput activeZip={activeZip}/>
